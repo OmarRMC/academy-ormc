@@ -74,7 +74,8 @@ export const courses = [
         modulo: 'II',
         title: 'Firebase Authentication',
         topics: ['Firebase', 'Login', 'Persistencia', 'Protección de rutas'],
-        deck: null,
+        enabled: true,
+        deck: () => import('../decks/react/Sesion05.jsx'),
       },
       {
         id: 'sesion-06',
