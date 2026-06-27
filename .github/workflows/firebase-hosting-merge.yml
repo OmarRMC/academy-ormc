@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+# Evita que dos despliegues a "live" se pisen (sin cancelar uno en curso)
+concurrency:
+  group: hosting-live
+  cancel-in-progress: false
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -18,3 +22,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ACADEMY_SOFT }}
           channelId: live
           projectId: academy-soft
+          firebaseToolsVersion: "13.35.1"
