@@ -42,8 +42,10 @@ const treeArbol = `&lt;<span class="dir">App</span>&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ &lt;<span class="dir">TaskForm</span>&gt;`
 
 const treeEstructura = `<span class="dir">src/</span>
+&nbsp;├─ <span class="dir">api/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># cliente Axios / endpoints</span>
 &nbsp;├─ <span class="dir">assets/</span> &nbsp;&nbsp;<span class="cmt"># imágenes, íconos</span>
 &nbsp;├─ <span class="dir">components/</span> <span class="cmt"># piezas reutilizables</span>
+&nbsp;├─ <span class="dir">constants/</span> <span class="cmt"># constantes y configuración</span>
 &nbsp;├─ <span class="dir">hooks/</span> &nbsp;&nbsp;<span class="cmt"># custom hooks</span>
 &nbsp;├─ <span class="dir">layouts/</span> &nbsp;<span class="cmt"># estructuras de página</span>
 &nbsp;├─ <span class="dir">pages/</span> &nbsp;&nbsp;<span class="cmt"># vistas / pantallas</span>
