@@ -4,7 +4,7 @@
 > Aprende construyendo proyectos reales, con las tecnologías y las buenas prácticas que se
 > usan en la industria.
 
-🔗 **Academy:** `academy-ormc.web.app` · **Portafolio:** [dev-ormc.web.app](https://dev-ormc.web.app/)
+🔗 **Academy:** `academy-soft.web.app` · **Portafolio:** [dev-ormc.web.app](https://dev-ormc.web.app/)
 
 ---
 
@@ -13,7 +13,7 @@
 Un espacio de formación **100 % práctico**, donde cada curso se construye sobre **un único
 proyecto profesional** que crece sesión a sesión, tal como se trabaja en un equipo real.
 
-- 🛠️ **Proyectos reales** de principio a fin — no ejercicios sueltos.
+- 🛠️ **Proyectos reales** de principio a fin - no ejercicios sueltos.
 - ✅ **Buenas prácticas** de arquitectura, código limpio y despliegue.
 - 🚀 **Flujo profesional completo:** desarrollo → control de versiones → CI/CD → producción.
 - 📊 **Material claro y organizado** por curso, módulo y sesión, para seguir y repasar.
@@ -67,7 +67,7 @@ Stack moderno y demandado, organizado por área:
 
 ## 👨‍💻 El instructor
 
-**Omar Rodrigo Mamani Capcha** — *Desarrollador Full Stack* · La Paz, Bolivia 🇧🇴
+**Omar Rodrigo Mamani Capcha** - *Desarrollador Full Stack* · La Paz, Bolivia 🇧🇴
 
 Desarrollador Full Stack con experiencia en **React, Node.js, Laravel y AWS**. Diseño e
 imparto cursos prácticos de desarrollo web moderno, centrados en construir productos reales

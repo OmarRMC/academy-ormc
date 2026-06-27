@@ -8,8 +8,8 @@ export const site = {
   // Marca de la plataforma
   brand: 'OmarRMC Academy',
 
-  // URL pública (canónica) — usada para SEO, Open Graph y sitemap.
-  url: 'https://academy-ormc.web.app',
+  // URL pública (canónica) - usada para SEO, Open Graph y sitemap.
+  url: 'https://academy-soft.web.app',
 
   // Datos personales (mostrados en hero y pie)
   instructor: 'Omar Rodrigo Mamani Capcha',

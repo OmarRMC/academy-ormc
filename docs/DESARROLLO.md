@@ -103,4 +103,4 @@ actual se refleja en la URL (`#5`) para compartir enlaces directos.
 ## Integración con el portafolio principal
 
 Todo el enganche vive en **`src/config/site.js`** (`portfolioUrl`, etc.). Para servirlo bajo
-un sub-path, define `VITE_BASE=/cursos/` al hacer el build. Ver `docs/INTEGRACION-PORTAFOLIO.md`.
+un sub-path, define `VITE_BASE=/cursos/` al hacer el build.
