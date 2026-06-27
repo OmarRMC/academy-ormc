@@ -47,7 +47,8 @@ export const courses = [
         modulo: 'I',
         title: 'Componentes Profesionales y Navegación',
         topics: ['Props', 'Children', 'Eventos', 'React Router DOM', 'Rutas protegidas'],
-        deck: null,
+        enabled: true,
+        deck: () => import('../decks/react/Sesion02.jsx'),
       },
       {
         id: 'sesion-03',

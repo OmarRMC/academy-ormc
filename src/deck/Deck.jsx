@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { site } from '../config/site.js'
 import { ArrowLeft, ArrowRight } from '../components/ui/Icons.jsx'
@@ -115,15 +115,56 @@ export default function Deck({ slides = [], course, session }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [next, prev, go, total, toggleFullscreen, exit])
 
-  // Clic en los laterales para avanzar/retroceder (ignora enlaces/botones)
+  // Clic en los laterales para avanzar/retroceder (ignora enlaces/botones).
+  // En pantallas táctiles se desactiva: ahí se usan swipe y los botones ‹/›,
+  // para no pelear con el scroll vertical de la diapositiva.
+  const down = useRef(null)
+  const onMouseDown = (e) => {
+    down.current = { x: e.clientX, y: e.clientY }
+  }
   const onClick = (e) => {
     if (e.target.closest('a, button')) return
+    if (window.matchMedia('(pointer: coarse)').matches) return
+    // Si el usuario seleccionó texto, NO cambiar de diapositiva.
+    if (!window.getSelection().isCollapsed) return
+    // Si arrastró el mouse (gesto de selección), tampoco cambiar.
+    if (down.current) {
+      const dx = e.clientX - down.current.x
+      const dy = e.clientY - down.current.y
+      down.current = null
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) return
+    }
     if (e.clientX > window.innerWidth * 0.5) next()
     else prev()
   }
 
+  // Swipe horizontal (táctil): si el desplazamiento en X supera el umbral y es
+  // claramente mayor que el vertical, cambia de diapositiva (no interfiere con el scroll).
+  const touch = useRef(null)
+  const onTouchStart = (e) => {
+    const t = e.changedTouches[0]
+    touch.current = { x: t.clientX, y: t.clientY }
+  }
+  const onTouchEnd = (e) => {
+    if (!touch.current) return
+    const t = e.changedTouches[0]
+    const dx = t.clientX - touch.current.x
+    const dy = t.clientY - touch.current.y
+    touch.current = null
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) next()
+      else prev()
+    }
+  }
+
   return (
-    <div className="deck-root" onClick={onClick}>
+    <div
+      className="deck-root"
+      onMouseDown={onMouseDown}
+      onClick={onClick}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <div className="deck-progress" style={{ width: `${((current + 1) / total) * 100}%` }} />
 
       <DeckLogo course={course} />
@@ -145,13 +186,30 @@ export default function Deck({ slides = [], course, session }) {
         </div>
         <div className="flex items-center" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <button className="deck-btn" onClick={toggleFullscreen} title="Pantalla completa (F)">
-            ⛶ Pantalla completa
+            ⛶ <span className="deck-fs-label">Pantalla completa</span>
           </button>
           <span className="counter">
             {current + 1} / {total}
           </span>
         </div>
       </div>
+
+      <button
+        className="deck-nav-btn prev"
+        onClick={prev}
+        disabled={current === 0}
+        aria-label="Diapositiva anterior"
+      >
+        <ArrowLeft size={22} />
+      </button>
+      <button
+        className="deck-nav-btn next"
+        onClick={next}
+        disabled={current === total - 1}
+        aria-label="Diapositiva siguiente"
+      >
+        <ArrowRight size={22} />
+      </button>
 
       <div className="deck-hint">
         <span className="deck-kbd"><ArrowLeft size={12} /></span> <span className="deck-kbd"><ArrowRight size={12} /></span> o barra espaciadora para
