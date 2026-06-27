@@ -507,7 +507,7 @@ export const slides = [
         </p>
         <p style={{ marginTop: '0.8rem' }}>
           El <span className="accent">Router</span> es un <b>recepcionista</b> 🛎️ que, según la URL,
-          decide <b>qué vista mostrar</b> — todo sin recargar el navegador.
+          decide <b>qué vista mostrar</b>: todo sin recargar el navegador.
         </p>
       </>
     }

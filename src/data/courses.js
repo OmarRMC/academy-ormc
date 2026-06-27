@@ -56,7 +56,8 @@ export const courses = [
         modulo: 'I',
         title: 'Consumo de APIs REST con Axios',
         topics: ['API REST', 'JSON', 'GET/POST/PUT/DELETE', 'Interceptores', 'CRUD'],
-        deck: null,
+        enabled: true,
+        deck: () => import('../decks/react/Sesion03.jsx'),
       },
       {
         id: 'sesion-04',
@@ -64,7 +65,8 @@ export const courses = [
         modulo: 'I',
         title: 'Estado Global y Formularios',
         topics: ['Zustand', 'React Hook Form', 'Validaciones', 'React Toastify'],
-        deck: null,
+        enabled: true,
+        deck: () => import('../decks/react/Sesion04.jsx'),
       },
       {
         id: 'sesion-05',

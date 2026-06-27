@@ -570,7 +570,7 @@ export const slides = [
         <tr><td><b>2</b></td><td>Componentes reutilizables y navegación (React Router)</td></tr>
         <tr><td><b>3</b></td><td>Consumo de API REST con Axios + CRUD de tareas</td></tr>
         <tr><td><b>4</b></td><td>Estado global (Zustand) y formularios (React Hook Form)</td></tr>
-        <tr><td><b>5–6</b></td><td>Firebase Authentication y Cloud Firestore</td></tr>
+        <tr><td><b>5-6</b></td><td>Firebase Authentication y Cloud Firestore</td></tr>
         <tr><td><b>7</b></td><td>Custom hooks, optimización y refactorización</td></tr>
         <tr><td><b>8</b></td><td>Git, GitHub Actions y despliegue automático (CI/CD)</td></tr>
       </tbody>
