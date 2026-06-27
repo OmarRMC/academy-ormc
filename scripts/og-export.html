@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exportar OG image a PNG</title>
+  <style>
+    body{font-family:Segoe UI,sans-serif;background:#0b1622;color:#e8f1f8;display:grid;place-items:center;min-height:100vh;margin:0;gap:16px;text-align:center}
+    img{max-width:600px;border:1px solid #234;border-radius:10px}
+    a,button{background:#61DAFB;color:#0b1622;border:none;border-radius:8px;padding:.6em 1.2em;font-weight:700;cursor:pointer;text-decoration:none}
+    p{color:#9db4c7;max-width:540px}
+  </style>
+</head>
+<body>
+  <h2>Exportar <code>og-image.svg</code> → <code>og-image.png</code></h2>
+  <p>Genera el PNG (1200×630) para máxima compatibilidad al compartir en WhatsApp, LinkedIn y Twitter. Pulsa el botón y guarda el archivo como <b>og-image.png</b> dentro de <b>public/img/brand/</b>.</p>
+  <canvas id="c" width="1200" height="630" style="display:none"></canvas>
+  <img id="preview" alt="preview" />
+  <button id="dl">⬇ Descargar og-image.png</button>
+  <script>
+    // Carga el SVG hermano (../public/og-image.svg) y lo pinta en un canvas
+    const url = '../public/img/brand/og-image.svg'
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      const c = document.getElementById('c')
+      c.getContext('2d').drawImage(img, 0, 0, 1200, 630)
+      document.getElementById('preview').src = c.toDataURL('image/png')
+    }
+    img.onerror = () => { document.getElementById('preview').alt = 'No se pudo cargar el SVG (ábrelo desde la carpeta del proyecto).' }
+    img.src = url
+    document.getElementById('dl').onclick = () => {
+      const c = document.getElementById('c')
+      const a = document.createElement('a')
+      a.download = 'og-image.png'
+      a.href = c.toDataURL('image/png')
+      a.click()
+    }
+  </script>
+</body>
+</html>
