@@ -56,14 +56,14 @@ export const catalog = [
       { id: 'sesion-05', n: 5, modulo: 'II', title: 'Firebase Authentication', topics: ['Firebase', 'Login', 'Persistencia', 'Protección de rutas'], status: 'disponible', descripcion: 'Autenticación con Firebase: login, persistencia de sesión y rutas protegidas.', order: 5, deckKey: 'react/Sesion05' },
       { id: 'sesion-06', n: 6, modulo: 'II', title: 'Cloud Firestore', topics: ['NoSQL', 'Colecciones', 'Documentos', 'Consultas', 'CRUD'], status: 'disponible', descripcion: 'Base de datos NoSQL en la nube: colecciones, documentos y consultas en tiempo real.', order: 6, deckKey: 'react/Sesion06' },
       { id: 'sesion-07', n: 7, modulo: 'II', title: 'Arquitectura Profesional y Optimización', topics: ['Custom Hooks', 'useMemo', 'useCallback', 'Lazy Loading'], status: 'disponible', descripcion: 'Custom hooks, memoización y carga diferida para una app mantenible y rápida.', order: 7, deckKey: 'react/Sesion07' },
-      { id: 'sesion-08', n: 8, modulo: 'II', title: 'Git, CI/CD y Despliegue en Firebase', topics: ['Git', 'GitHub Actions', 'CI/CD', 'Firebase Hosting'], status: 'proximamente', descripcion: 'Flujo Git, integración y despliegue continuo con GitHub Actions y Firebase Hosting.', order: 8, deckKey: null },
+      { id: 'sesion-08', n: 8, modulo: 'II', title: 'Git, CI/CD y Despliegue en Firebase', topics: ['Git', 'GitHub Actions', 'CI/CD', 'Firebase Hosting'], status: 'disponible', descripcion: 'Flujo Git, integración y despliegue continuo con GitHub Actions y Firebase Hosting.', order: 8, deckKey: 'react/Sesion08' },
     ],
   },
 
   {
-    id: 'laravel-12',
-    title: 'Desarrollo de Aplicaciones Web con Laravel 12',
-    short: 'Laravel 12',
+    id: 'laravel-13',
+    title: 'Desarrollo de Aplicaciones Web con Laravel 13',
+    short: 'Laravel 13',
     theme: 'laravel',
     icon: '🅛',
     enabled: true,
@@ -76,11 +76,11 @@ export const catalog = [
     duracion: '4 semanas · 12 sesiones',
     nivel: 'Intermedio',
     resumen:
-      'Desarrolla un sistema de gestión completo con Laravel 12: patrón MVC, Eloquent ORM, ' +
+      'Desarrolla un sistema de gestión completo con Laravel 13: patrón MVC, Eloquent ORM, ' +
       'autenticación, roles y permisos, APIs REST, colas, reportes y despliegue en producción.',
-    stack: ['Laravel 12', 'PHP', 'Eloquent', 'Blade', 'MySQL', 'Spatie Permission', 'API REST'],
+    stack: ['Laravel 13', 'PHP 8.3+', 'Eloquent', 'Blade', 'MySQL', 'Spatie Permission', 'API REST'],
     sessions: [
-      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 12', topics: ['MVC', 'Composer', 'Artisan', '.env'], status: 'proximamente', descripcion: 'Estructura de un proyecto Laravel 12, Composer, Artisan y configuración con .env.', order: 1, deckKey: null },
+      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 13', topics: ['MVC', 'Composer', 'Artisan', '.env'], status: 'proximamente', descripcion: 'Estructura de un proyecto Laravel 13, Composer, Artisan y configuración con .env.', order: 1, deckKey: null },
       { id: 'sesion-02', n: 2, modulo: 'I', title: 'Rutas y Controladores', topics: ['Rutas Web', 'Controladores', 'Route Groups'], status: 'proximamente', descripcion: 'Definir rutas web, controladores y agruparlas para organizar la aplicación.', order: 2, deckKey: null },
       { id: 'sesion-03', n: 3, modulo: 'I', title: 'Blade y Patrón MVC', topics: ['Blade', 'Layouts', 'Componentes', 'Helpers'], status: 'proximamente', descripcion: 'Vistas con Blade: layouts, componentes y helpers dentro del patrón MVC.', order: 3, deckKey: null },
       { id: 'sesion-04', n: 4, modulo: 'I', title: 'Base de Datos', topics: ['Migraciones', 'Seeders', 'Factories', 'Query Builder'], status: 'proximamente', descripcion: 'Migraciones, seeders, factories y consultas con el Query Builder.', order: 4, deckKey: null },

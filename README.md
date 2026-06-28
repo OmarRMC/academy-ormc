@@ -26,7 +26,7 @@ proyecto profesional** que crece sesión a sesión, tal como se trabaja en un eq
 | Curso | Qué aprenderás | Sesiones |
 |---|---|---|
 | **React JS + CI/CD** | Desarrollo Front-End profesional: una SPA completa (Sistema de Gestión de Tareas) con consumo de APIs REST, estado global, autenticación con Firebase y despliegue automatizado con CI/CD. | 8 |
-| **Laravel 12** | Desarrollo Back-End profesional: un sistema de gestión completo con MVC, Eloquent ORM, roles y permisos, APIs REST, colas, reportes (PDF/Excel) y despliegue en producción. | 12 |
+| **Laravel 13** | Desarrollo Back-End profesional: un sistema de gestión completo con MVC, Eloquent ORM, roles y permisos, APIs REST, colas, reportes (PDF/Excel) y despliegue en producción. | 12 |
 
 ---
 
@@ -38,7 +38,7 @@ Stack moderno y demandado, organizado por área:
 `React` · `Vite` · `React Router` · `Zustand` · `Axios` · `React Hook Form` · `Tailwind CSS` · `React Toastify` · `Day.js`
 
 **Back-End**
-`Laravel 12` · `PHP` · `Eloquent ORM` · `Blade`
+`Laravel 13` · `PHP 8.3+` · `Eloquent ORM` · `Blade`
 
 **Bases de datos**
 `MySQL` · `Cloud Firestore (NoSQL)`
