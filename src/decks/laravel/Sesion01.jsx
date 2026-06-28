@@ -23,11 +23,11 @@ export const meta = {
 
 // ── Bloques de código (HTML resaltado) ────────────────────────────────────
 
-const codeInstall = `<span class="tok-com"># Opción A — script oficial (Windows PowerShell como administrador)</span>
+const codeInstall = `<span class="tok-com"># Opción A - script oficial (Windows PowerShell como administrador)</span>
 <span class="tok-com"># Instala PHP 8.5, Composer y el Laravel installer</span>
 iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
 
-<span class="tok-com"># Opción B — si ya tienes PHP 8.3+ y Composer</span>
+<span class="tok-com"># Opción B - si ya tienes PHP 8.3+ y Composer</span>
 composer global require laravel/installer
 
 <span class="tok-com"># Verificar</span>
@@ -56,7 +56,7 @@ const codeEnv = `<span class="tok-attr">APP_NAME</span>=<span class="tok-str">"G
 <span class="tok-attr">APP_DEBUG</span>=<span class="tok-key">true</span>
 <span class="tok-attr">APP_URL</span>=<span class="tok-str">http://localhost:8000</span>
 
-<span class="tok-com"># Base de datos — el curso usa MySQL</span>
+<span class="tok-com"># Base de datos - el curso usa MySQL</span>
 <span class="tok-attr">DB_CONNECTION</span>=mysql
 <span class="tok-attr">DB_HOST</span>=127.0.0.1
 <span class="tok-attr">DB_PORT</span>=3306

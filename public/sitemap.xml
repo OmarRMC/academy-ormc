@@ -22,6 +22,61 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-08</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://academy-soft.web.app/cursos/laravel-13/sesion-12</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://academy-soft.web.app/cursos/react-cicd/sesion-01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
