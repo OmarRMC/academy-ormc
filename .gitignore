@@ -17,3 +17,4 @@ scripts/seed-firestore.mjs
 docs/
 .vscode/*
 !.vscode/extensions.json
+.claude

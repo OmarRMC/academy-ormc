@@ -23,6 +23,13 @@ export const deckRegistry = {
   'react/Sesion07': () => import('./react/Sesion07.jsx'),
   'react/Sesion08': () => import('./react/Sesion08.jsx'),
   'laravel/Sesion01': () => import('./laravel/Sesion01.jsx'),
+  'laravel/Sesion02': () => import('./laravel/Sesion02.jsx'),
+  'laravel/Sesion03': () => import('./laravel/Sesion03.jsx'),
+  'laravel/Sesion04': () => import('./laravel/Sesion04.jsx'),
+  'laravel/Sesion05': () => import('./laravel/Sesion05.jsx'),
+  'laravel/Sesion06': () => import('./laravel/Sesion06.jsx'),
+  'laravel/Sesion07': () => import('./laravel/Sesion07.jsx'),
+  'laravel/Sesion08': () => import('./laravel/Sesion08.jsx'),
 }
 
 // Devuelve la función de import del deck para un `deckKey`, o null si no existe
