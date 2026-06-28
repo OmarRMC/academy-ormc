@@ -80,7 +80,7 @@ export const catalog = [
       'autenticación, roles y permisos, APIs REST, colas, reportes y despliegue en producción.',
     stack: ['Laravel 13', 'PHP 8.3+', 'Eloquent', 'Blade', 'MySQL', 'Spatie Permission', 'API REST'],
     sessions: [
-      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 13', topics: ['MVC', 'Composer', 'Artisan', '.env'], status: 'proximamente', descripcion: 'Estructura de un proyecto Laravel 13, Composer, Artisan y configuración con .env.', order: 1, deckKey: null },
+      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 13', topics: ['MVC', 'Composer', 'Artisan', '.env'], status: 'disponible', descripcion: 'Estructura de un proyecto Laravel 13, Composer, Artisan y configuración con .env.', order: 1, deckKey: 'laravel/Sesion01' },
       { id: 'sesion-02', n: 2, modulo: 'I', title: 'Rutas y Controladores', topics: ['Rutas Web', 'Controladores', 'Route Groups'], status: 'proximamente', descripcion: 'Definir rutas web, controladores y agruparlas para organizar la aplicación.', order: 2, deckKey: null },
       { id: 'sesion-03', n: 3, modulo: 'I', title: 'Blade y Patrón MVC', topics: ['Blade', 'Layouts', 'Componentes', 'Helpers'], status: 'proximamente', descripcion: 'Vistas con Blade: layouts, componentes y helpers dentro del patrón MVC.', order: 3, deckKey: null },
       { id: 'sesion-04', n: 4, modulo: 'I', title: 'Base de Datos', topics: ['Migraciones', 'Seeders', 'Factories', 'Query Builder'], status: 'proximamente', descripcion: 'Migraciones, seeders, factories y consultas con el Query Builder.', order: 4, deckKey: null },

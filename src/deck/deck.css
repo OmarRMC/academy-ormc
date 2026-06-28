@@ -24,6 +24,21 @@
   background: linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%);
 }
 
+/* Tema por curso: aunque la marca de Laravel es roja, el acento del TEXTO del
+   visor se usa en naranja (más legible sobre el fondo oscuro). Todos los acentos
+   usan var(--react), así que basta con redefinirla. */
+.deck-root[data-theme='laravel'] { --react: #ff7a1a; }
+.deck-root[data-theme='laravel'] .num { color: rgba(255, 122, 26, 0.22); }
+
+/* Logo de Laravel en portada/cierre (imagen) */
+.deck-root .logo-laravel {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1.2rem;
+}
+
 /* Barra de progreso superior */
 .deck-progress {
   position: absolute;

@@ -19,9 +19,9 @@ export default {
         green: '#3ddc84',
         orange: '#ff8c42',
         purple: '#b794f6',
-        // Curso Laravel (paleta diferenciada)
-        laravel: '#ff2d20',
-        laravelDark: '#b91c1c',
+        // Curso Laravel (acento en naranja, a juego con el visor de diapositivas)
+        laravel: '#ff7a1a',
+        laravelDark: '#c25e10',
       },
       fontFamily: {
         sans: ['Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],

@@ -18,6 +18,12 @@ function DeckLogo({ course }) {
   )
 }
 
+// Logo de Laravel (imagen) reutilizado en portadas/cierre del curso Laravel.
+export function LaravelLogo({ className = 'logo-laravel' }) {
+  const src = import.meta.env.BASE_URL.replace(/\/$/, '') + '/img/tech/laravel.svg'
+  return <img className={className} src={src} alt="Laravel" />
+}
+
 // Logo de React en SVG (reutilizado en portadas)
 export function ReactLogo({ className = 'logo-react', spin = '9s' }) {
   return (
@@ -160,6 +166,7 @@ export default function Deck({ slides = [], course, session }) {
   return (
     <div
       className="deck-root"
+      data-theme={course?.theme}
       onMouseDown={onMouseDown}
       onClick={onClick}
       onTouchStart={onTouchStart}
