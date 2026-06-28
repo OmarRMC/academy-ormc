@@ -20,6 +20,7 @@ export const deckRegistry = {
   'react/Sesion04': () => import('./react/Sesion04.jsx'),
   'react/Sesion05': () => import('./react/Sesion05.jsx'),
   'react/Sesion06': () => import('./react/Sesion06.jsx'),
+  'react/Sesion07': () => import('./react/Sesion07.jsx'),
 }
 
 // Devuelve la función de import del deck para un `deckKey`, o null si no existe
