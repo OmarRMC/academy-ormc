@@ -1,0 +1,14 @@
+rules_version = '2';
+
+// Reglas del catálogo de cursos.
+//   LECTURA: pública (la web es pública y necesita mostrar los cursos).
+//   ESCRITURA: cerrada desde el cliente. Solo se escribe desde la consola de
+//   Firebase o desde el script de seed (que usa la clave admin y bypassa reglas).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /courses/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

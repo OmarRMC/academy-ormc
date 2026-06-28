@@ -1,9 +1,11 @@
 import { site } from '../config/site.js'
-import { courses } from '../data/courses.js'
+import { useCatalog } from '../data/CatalogProvider.jsx'
 import CourseCard from '../components/CourseCard.jsx'
 import Seo from '../components/Seo.jsx'
 
 export default function HomePage() {
+  const { courses, loading } = useCatalog()
+
   // Lista estructurada de cursos para los buscadores
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -39,13 +41,19 @@ export default function HomePage() {
       <section className="pb-10">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold">Cursos & Talleres</h2>
-          <span className="text-sm text-muted">{courses.length} cursos</span>
+          {!loading && (
+            <span className="text-sm text-muted">{courses.length} cursos</span>
+          )}
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          {courses.map((c) => (
-            <CourseCard key={c.id} course={c} />
-          ))}
-        </div>
+        {loading ? (
+          <p className="text-muted py-10 text-center">Cargando cursos…</p>
+        ) : (
+          <div className="grid gap-5 sm:grid-cols-2">
+            {courses.map((c) => (
+              <CourseCard key={c.id} course={c} />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   )

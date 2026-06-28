@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getCourse, availableCount } from '../data/courses.js'
+import { availableCount } from '../data/courses.js'
+import { useCatalog } from '../data/CatalogProvider.jsx'
 import SessionRow from '../components/SessionRow.jsx'
 import Pill from '../components/ui/Pill.jsx'
 import Badge from '../components/ui/Badge.jsx'
@@ -10,7 +11,17 @@ import { ArrowLeft } from '../components/ui/Icons.jsx'
 
 export default function CoursePage() {
   const { courseId } = useParams()
+  const { getCourse, loading } = useCatalog()
   const course = getCourse(courseId)
+
+  // Mientras carga el catálogo no decidimos nada (evita redirigir por error).
+  if (loading) {
+    return (
+      <div className="max-w-5xl mx-auto px-5 py-20 text-center text-muted">
+        Cargando curso…
+      </div>
+    )
+  }
 
   if (!course) return <Navigate to="/" replace />
 

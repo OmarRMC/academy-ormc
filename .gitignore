@@ -8,5 +8,12 @@ dist-ssr
 !.env.example
 .firebase
 firebase-debug.log
+
+# Seed local de Firestore: el script y la clave admin NO se suben al repo
+scripts/seed-firestore.mjs
+**/serviceAccount*.json
+
+# Documentación interna: no se sube al repo
+docs/
 .vscode/*
 !.vscode/extensions.json

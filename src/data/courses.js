@@ -1,23 +1,40 @@
 // ─────────────────────────────────────────────────────────────────────────
-// CATÁLOGO - única fuente de verdad que alimenta toda la UI del portal.
+// CATÁLOGO ESTÁTICO — copia de respaldo (fallback) y fuente del script de seed.
 //
-// Agregar una SESIÓN  → crear src/decks/<curso>/SesionXX.jsx y apuntar `deck:`
-//                       a su import dinámico (lazy). Sin deck → "Próximamente".
-// Agregar un CURSO     → añadir un objeto nuevo a este array.
+// En PRODUCCIÓN el catálogo se lee de Firestore (ver src/data/catalogService.js).
+// Este archivo cumple dos funciones:
+//   1. FALLBACK: si Firestore falla o aún no tiene datos, la app usa esto y sigue
+//      funcionando igual que antes.
+//   2. SEED: `npm run seed` sube exactamente este contenido a Firestore.
 //
-// HABILITAR / DESHABILITAR una sesión → `enabled: true | false`.
-//   Una sesión se considera DISPONIBLE solo si tiene `deck` Y `enabled` !== false.
-//   Pon `enabled: false` para ocultar temporalmente una sesión (aunque ya tenga
-//   material): se mostrará como "Próximamente". Si se omite, se asume habilitada.
+// IMPORTANTE: este archivo debe ser 100% serializable (solo datos, sin funciones)
+// para que tanto el navegador como Node (el seed) puedan importarlo. Por eso el
+// material de cada sesión se referencia con `deckKey` (un texto), NO con un import.
+// El mapeo deckKey → módulo de diapositivas vive en src/decks/registry.js.
+//
+// Campos de control que ahora puedes manejar desde la consola de Firebase
+// (sin tocar código ni redesplegar):
+//   enabled     (curso)   → mostrar u ocultar el curso completo.
+//   order       (curso)   → orden en el home (menor = primero).
+//   status      (sesión)  → 'disponible' | 'proximamente' (define la etiqueta).
+//                           Vocabulario y estilos en src/data/sessionStatus.js.
+//   descripcion (sesión)  → resumen corto opcional, visible en la página del curso.
+//   order       (sesión)  → orden de la sesión dentro del curso.
+//   deckKey     (sesión)  → qué módulo de diapositivas carga (o null = sin material).
+//
+// Una sesión se ABRE (visor) solo si status === 'disponible' Y tiene deck.
 // ─────────────────────────────────────────────────────────────────────────
+import { isOpenable } from './sessionStatus.js'
 
-export const courses = [
+export const catalog = [
   {
     id: 'react-cicd',
     title: 'Desarrollo Front-End Profesional con React, Firebase y CI/CD',
     short: 'React JS + CI/CD',
     theme: 'react',
     icon: '⚛',
+    enabled: true, // habilitar / ocultar el curso completo
+    order: 1, // orden en el home (menor = primero)
     // Logos de tecnologías representativas (archivos en /public/img/tech/)
     logos: [
       { name: 'React', src: 'react.svg' },
@@ -32,75 +49,14 @@ export const courses = [
       'consumo de APIs REST, estado global, Firebase y despliegue automatizado con CI/CD.',
     stack: ['React', 'Vite', 'React Router', 'Zustand', 'Axios', 'Tailwind', 'Firebase', 'GitHub Actions'],
     sessions: [
-      {
-        id: 'sesion-01',
-        n: 1,
-        modulo: 'I',
-        title: 'Introducción al Ecosistema React Moderno',
-        topics: ['SPA', 'Virtual DOM', 'Componentes', 'JSX', 'Hooks', 'Vite'],
-        enabled: true,
-        deck: () => import('../decks/react/Sesion01.jsx'),
-      },
-      {
-        id: 'sesion-02',
-        n: 2,
-        modulo: 'I',
-        title: 'Componentes Profesionales y Navegación',
-        topics: ['Props', 'Children', 'Eventos', 'React Router DOM', 'Rutas protegidas'],
-        enabled: true,
-        deck: () => import('../decks/react/Sesion02.jsx'),
-      },
-      {
-        id: 'sesion-03',
-        n: 3,
-        modulo: 'I',
-        title: 'Consumo de APIs REST con Axios',
-        topics: ['API REST', 'JSON', 'GET/POST/PUT/DELETE', 'Interceptores', 'CRUD'],
-        enabled: true,
-        deck: () => import('../decks/react/Sesion03.jsx'),
-      },
-      {
-        id: 'sesion-04',
-        n: 4,
-        modulo: 'I',
-        title: 'Estado Global y Formularios',
-        topics: ['Zustand', 'React Hook Form', 'Validaciones', 'React Toastify'],
-        enabled: true,
-        deck: () => import('../decks/react/Sesion04.jsx'),
-      },
-      {
-        id: 'sesion-05',
-        n: 5,
-        modulo: 'II',
-        title: 'Firebase Authentication',
-        topics: ['Firebase', 'Login', 'Persistencia', 'Protección de rutas'],
-        enabled: true,
-        deck: () => import('../decks/react/Sesion05.jsx'),
-      },
-      {
-        id: 'sesion-06',
-        n: 6,
-        modulo: 'II',
-        title: 'Cloud Firestore',
-        topics: ['NoSQL', 'Colecciones', 'Documentos', 'Consultas', 'CRUD'],
-        deck: null,
-      },
-      {
-        id: 'sesion-07',
-        n: 7,
-        modulo: 'II',
-        title: 'Arquitectura Profesional y Optimización',
-        topics: ['Custom Hooks', 'useMemo', 'useCallback', 'Lazy Loading'],
-        deck: null,
-      },
-      {
-        id: 'sesion-08',
-        n: 8,
-        modulo: 'II',
-        title: 'Git, CI/CD y Despliegue en Firebase',
-        topics: ['Git', 'GitHub Actions', 'CI/CD', 'Firebase Hosting'],
-        deck: null,
-      },
+      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción al Ecosistema React Moderno', topics: ['SPA', 'Virtual DOM', 'Componentes', 'JSX', 'Hooks', 'Vite'], status: 'disponible', descripcion: 'Qué es una SPA, el Virtual DOM y cómo arrancar un proyecto React con Vite.', order: 1, deckKey: 'react/Sesion01' },
+      { id: 'sesion-02', n: 2, modulo: 'I', title: 'Componentes Profesionales y Navegación', topics: ['Props', 'Children', 'Eventos', 'React Router DOM', 'Rutas protegidas'], status: 'disponible', descripcion: 'Componentes reutilizables, props/children y navegación con React Router.', order: 2, deckKey: 'react/Sesion02' },
+      { id: 'sesion-03', n: 3, modulo: 'I', title: 'Consumo de APIs REST con Axios', topics: ['API REST', 'JSON', 'GET/POST/PUT/DELETE', 'Interceptores', 'CRUD'], status: 'disponible', descripcion: 'Conectar la SPA a una API REST con Axios y construir un CRUD completo.', order: 3, deckKey: 'react/Sesion03' },
+      { id: 'sesion-04', n: 4, modulo: 'I', title: 'Estado Global y Formularios', topics: ['Zustand', 'React Hook Form', 'Validaciones', 'React Toastify'], status: 'disponible', descripcion: 'Estado global con Zustand y formularios validados con React Hook Form.', order: 4, deckKey: 'react/Sesion04' },
+      { id: 'sesion-05', n: 5, modulo: 'II', title: 'Firebase Authentication', topics: ['Firebase', 'Login', 'Persistencia', 'Protección de rutas'], status: 'disponible', descripcion: 'Autenticación con Firebase: login, persistencia de sesión y rutas protegidas.', order: 5, deckKey: 'react/Sesion05' },
+      { id: 'sesion-06', n: 6, modulo: 'II', title: 'Cloud Firestore', topics: ['NoSQL', 'Colecciones', 'Documentos', 'Consultas', 'CRUD'], status: 'proximamente', descripcion: 'Base de datos NoSQL en la nube: colecciones, documentos y consultas en tiempo real.', order: 6, deckKey: null },
+      { id: 'sesion-07', n: 7, modulo: 'II', title: 'Arquitectura Profesional y Optimización', topics: ['Custom Hooks', 'useMemo', 'useCallback', 'Lazy Loading'], status: 'proximamente', descripcion: 'Custom hooks, memoización y carga diferida para una app mantenible y rápida.', order: 7, deckKey: null },
+      { id: 'sesion-08', n: 8, modulo: 'II', title: 'Git, CI/CD y Despliegue en Firebase', topics: ['Git', 'GitHub Actions', 'CI/CD', 'Firebase Hosting'], status: 'proximamente', descripcion: 'Flujo Git, integración y despliegue continuo con GitHub Actions y Firebase Hosting.', order: 8, deckKey: null },
     ],
   },
 
@@ -110,6 +66,8 @@ export const courses = [
     short: 'Laravel 12',
     theme: 'laravel',
     icon: '🅛',
+    enabled: true,
+    order: 2,
     // Logos de tecnologías representativas (archivos en /public/img/tech/)
     logos: [
       { name: 'Laravel', src: 'laravel.svg' },
@@ -122,32 +80,30 @@ export const courses = [
       'autenticación, roles y permisos, APIs REST, colas, reportes y despliegue en producción.',
     stack: ['Laravel 12', 'PHP', 'Eloquent', 'Blade', 'MySQL', 'Spatie Permission', 'API REST'],
     sessions: [
-      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 12', topics: ['MVC', 'Composer', 'Artisan', '.env'], deck: null },
-      { id: 'sesion-02', n: 2, modulo: 'I', title: 'Rutas y Controladores', topics: ['Rutas Web', 'Controladores', 'Route Groups'], deck: null },
-      { id: 'sesion-03', n: 3, modulo: 'I', title: 'Blade y Patrón MVC', topics: ['Blade', 'Layouts', 'Componentes', 'Helpers'], deck: null },
-      { id: 'sesion-04', n: 4, modulo: 'I', title: 'Base de Datos', topics: ['Migraciones', 'Seeders', 'Factories', 'Query Builder'], deck: null },
-      { id: 'sesion-05', n: 5, modulo: 'I', title: 'Eloquent ORM y Relaciones', topics: ['Modelos', 'Relaciones', 'Pivot', 'Scopes'], deck: null },
-      { id: 'sesion-06', n: 6, modulo: 'II', title: 'Autenticación y Gestión de Roles', topics: ['Breeze', 'Roles', 'Permisos', 'Spatie Permission'], deck: null },
-      { id: 'sesion-07', n: 7, modulo: 'II', title: 'Middleware y Control de Acceso', topics: ['Middleware', 'Protección de rutas', 'Sesiones'], deck: null },
-      { id: 'sesion-08', n: 8, modulo: 'II', title: 'Formularios y Validaciones', topics: ['Form Request', 'Validaciones', 'Archivos'], deck: null },
-      { id: 'sesion-09', n: 9, modulo: 'III', title: 'CRUD Profesional y Reportes', topics: ['Resource Controllers', 'Paginación', 'PDF', 'Excel'], deck: null },
-      { id: 'sesion-10', n: 10, modulo: 'III', title: 'APIs RESTful', topics: ['API Resources', 'JSON', 'Postman', 'Versionado'], deck: null },
-      { id: 'sesion-11', n: 11, modulo: 'III', title: 'Funcionalidades Avanzadas', topics: ['Correos', 'Colas/Queues', 'Comandos Artisan', 'Scheduler'], deck: null },
-      { id: 'sesion-12', n: 12, modulo: 'III', title: 'Despliegue en Producción', topics: ['Git', 'GitHub', 'Optimización', 'Seguridad'], deck: null },
+      { id: 'sesion-01', n: 1, modulo: 'I', title: 'Introducción a Laravel 12', topics: ['MVC', 'Composer', 'Artisan', '.env'], status: 'proximamente', descripcion: 'Estructura de un proyecto Laravel 12, Composer, Artisan y configuración con .env.', order: 1, deckKey: null },
+      { id: 'sesion-02', n: 2, modulo: 'I', title: 'Rutas y Controladores', topics: ['Rutas Web', 'Controladores', 'Route Groups'], status: 'proximamente', descripcion: 'Definir rutas web, controladores y agruparlas para organizar la aplicación.', order: 2, deckKey: null },
+      { id: 'sesion-03', n: 3, modulo: 'I', title: 'Blade y Patrón MVC', topics: ['Blade', 'Layouts', 'Componentes', 'Helpers'], status: 'proximamente', descripcion: 'Vistas con Blade: layouts, componentes y helpers dentro del patrón MVC.', order: 3, deckKey: null },
+      { id: 'sesion-04', n: 4, modulo: 'I', title: 'Base de Datos', topics: ['Migraciones', 'Seeders', 'Factories', 'Query Builder'], status: 'proximamente', descripcion: 'Migraciones, seeders, factories y consultas con el Query Builder.', order: 4, deckKey: null },
+      { id: 'sesion-05', n: 5, modulo: 'I', title: 'Eloquent ORM y Relaciones', topics: ['Modelos', 'Relaciones', 'Pivot', 'Scopes'], status: 'proximamente', descripcion: 'Modelos Eloquent, relaciones, tablas pivote y scopes reutilizables.', order: 5, deckKey: null },
+      { id: 'sesion-06', n: 6, modulo: 'II', title: 'Autenticación y Gestión de Roles', topics: ['Breeze', 'Roles', 'Permisos', 'Spatie Permission'], status: 'proximamente', descripcion: 'Autenticación con Breeze y manejo de roles y permisos con Spatie.', order: 6, deckKey: null },
+      { id: 'sesion-07', n: 7, modulo: 'II', title: 'Middleware y Control de Acceso', topics: ['Middleware', 'Protección de rutas', 'Sesiones'], status: 'proximamente', descripcion: 'Middleware para proteger rutas y controlar el acceso por sesión.', order: 7, deckKey: null },
+      { id: 'sesion-08', n: 8, modulo: 'II', title: 'Formularios y Validaciones', topics: ['Form Request', 'Validaciones', 'Archivos'], status: 'proximamente', descripcion: 'Validar datos con Form Requests y manejar la subida de archivos.', order: 8, deckKey: null },
+      { id: 'sesion-09', n: 9, modulo: 'III', title: 'CRUD Profesional y Reportes', topics: ['Resource Controllers', 'Paginación', 'PDF', 'Excel'], status: 'proximamente', descripcion: 'CRUD con resource controllers, paginación y reportes en PDF y Excel.', order: 9, deckKey: null },
+      { id: 'sesion-10', n: 10, modulo: 'III', title: 'APIs RESTful', topics: ['API Resources', 'JSON', 'Postman', 'Versionado'], status: 'proximamente', descripcion: 'Construir y versionar APIs REST con API Resources y probarlas en Postman.', order: 10, deckKey: null },
+      { id: 'sesion-11', n: 11, modulo: 'III', title: 'Funcionalidades Avanzadas', topics: ['Correos', 'Colas/Queues', 'Comandos Artisan', 'Scheduler'], status: 'proximamente', descripcion: 'Correos, colas, comandos Artisan y tareas programadas con el scheduler.', order: 11, deckKey: null },
+      { id: 'sesion-12', n: 12, modulo: 'III', title: 'Despliegue en Producción', topics: ['Git', 'GitHub', 'Optimización', 'Seguridad'], status: 'proximamente', descripcion: 'Llevar la aplicación a producción con buenas prácticas de optimización y seguridad.', order: 12, deckKey: null },
     ],
   },
 ]
 
-// Helpers de acceso usados por las páginas
-export const getCourse = (courseId) => courses.find((c) => c.id === courseId)
+// ── Helpers puros (sin dependencias de Firestore ni de los decks) ──────────
+// Operan sobre una sesión YA NORMALIZADA (catalogService resuelve `deckKey` → `deck`).
 
-export const getSession = (courseId, sessionId) => {
-  const course = getCourse(courseId)
-  return course ? course.sessions.find((s) => s.id === sessionId) : undefined
-}
+// Una sesión está DISPONIBLE (abre el visor) si su estado es 'disponible' y tiene
+// material. La lógica vive en sessionStatus.js; aquí solo la reexportamos con el
+// nombre que usan las páginas.
+export const isAvailable = isOpenable
 
-// Una sesión está DISPONIBLE si tiene deck y no está deshabilitada explícitamente.
-export const isAvailable = (session) => Boolean(session?.deck) && session?.enabled !== false
-
-// Cuenta de sesiones disponibles
-export const availableCount = (course) => course.sessions.filter(isAvailable).length
+// Cuenta de sesiones disponibles dentro de un curso.
+export const availableCount = (course) =>
+  (course?.sessions || []).filter(isAvailable).length

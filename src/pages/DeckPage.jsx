@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getCourse, getSession, isAvailable } from '../data/courses.js'
+import { isAvailable } from '../data/courses.js'
+import { useCatalog } from '../data/CatalogProvider.jsx'
 import Deck from '../deck/Deck.jsx'
 import Seo from '../components/Seo.jsx'
 import { ArrowLeft } from '../components/ui/Icons.jsx'
 
 export default function DeckPage() {
   const { courseId, sessionId } = useParams()
+  const { getCourse, getSession, loading } = useCatalog()
   const course = getCourse(courseId)
   const session = getSession(courseId, sessionId)
 
@@ -27,6 +29,15 @@ export default function DeckPage() {
       alive = false
     }
   }, [session])
+
+  // Mientras carga el catálogo, no decidimos 404 ni "en preparación".
+  if (loading) {
+    return (
+      <div className="fixed inset-0 grid place-items-center bg-bg text-muted">
+        <p>Cargando presentación…</p>
+      </div>
+    )
+  }
 
   // Curso/sesión inexistentes
   if (!course || !session) return <Navigate to="/" replace />
